@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebFlux Starter Page</title>
+</head>
+<body>
+<h1>weiweiweiweiwewewewieiwie</h1>
+<h2>weiweiweiweiwewewewieiwie</h2>
+
+<div id="app">
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const instance = axios.create({
+        baseURL: 'http://localhost:8888/rest',
+        timeout: 1000000,
+        responseType: 'stream',
+        onDownloadProgress: function (progressEvent) {
+            document.getElementById("app").innerHTML = progressEvent.event.currentTarget.responseText + "<br/>"
+        },
+    });
+    instance.get('/sse?key="ali"')
+        .then(function (response) {
+            // 处理成功情况
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            // 处理错误情况
+            console.log(error);
+        });
+
+</script>
+<style>
+    #app {
+        width: 200px;
+        height: 40px;
+        line-height: 40px;
+        background-color: antiquewhite;
+    }
+</style>
+</html>
