@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: BootFluxApplication
+  r2dbc:
+    name: flux
+    username: root
+    password: root@123
+    url: r2dbc:mysql://localhost:3306/
+server:
+  port: 8888

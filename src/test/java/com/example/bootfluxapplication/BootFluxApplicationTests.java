@@ -1,6 +1,8 @@
 package com.example.bootfluxapplication;
 
+import com.example.bootfluxapplication.repositories.TUserRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -12,6 +14,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.server.HttpServer;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @SpringBootTest
 class BootFluxApplicationTests {
@@ -40,6 +43,23 @@ class BootFluxApplicationTests {
 
         try {
             //堵住线程进行
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //测试工具，测试r2dbc的工具接口
+    @Autowired
+    private TUserRepository tUserRepository;
+
+    @Test
+    public void toolsTest() {
+       /* tUserRepository.findAll().subscribe(tUser -> {
+            System.out.println("tUser = " + tUser);
+        });*/
+        tUserRepository.findTuserByIdInAndUsernameLike(Arrays.asList(1L, 2L), "a%").subscribe(System.out::println);
+        try {
             System.in.read();
         } catch (IOException e) {
             e.printStackTrace();
