@@ -18,6 +18,7 @@ import java.util.Collection;
 @Repository
 public interface TUserRepository extends R2dbcRepository<TUser, Long> {
 
+    //只限于单表的复杂条件查询操作
     //直接利用其命名规则就可以完成指定的SQL查询
     public Flux<TUser> findTuserByIdInAndUsernameLike(Collection<Long> id, String username);
 
