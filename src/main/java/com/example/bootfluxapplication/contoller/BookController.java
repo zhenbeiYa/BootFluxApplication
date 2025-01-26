@@ -2,6 +2,7 @@ package com.example.bootfluxapplication.contoller;
 
 import com.example.bootfluxapplication.entity.TBook;
 import com.example.bootfluxapplication.service.TBookService;
+import com.example.bootfluxapplication.vo.AuthorBookVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -25,7 +26,7 @@ public class BookController {
     }
 
     @PostMapping("/info")
-    public Flux<TBook> findBooksByAuthorId(@RequestParam("id")Integer id){
+    public Flux<AuthorBookVo> findBooksByAuthorId(@RequestParam("id")Integer id){
         return  tBookService.findBooksAndAuthor(Long.parseLong(String.valueOf(id)));
     }
 }

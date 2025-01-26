@@ -1,13 +1,14 @@
 package com.example.bootfluxapplication.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.bootfluxapplication.entity.Author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 /**
  * @author 23133
@@ -15,9 +16,14 @@ import java.time.LocalDateTime;
  * @description: 作者书籍Vo
  * @date 2025/1/24 19:27
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table("t_book")
 public class AuthorBookVo implements Serializable {
 
     //作者ID
+    @Id
     private Long id;
     //作者名称
     private String name;
@@ -26,57 +32,8 @@ public class AuthorBookVo implements Serializable {
 
     private Long authorId;
     //书籍发布时间
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:ss:mm")
-    private LocalDateTime publishTime;
 
-    public AuthorBookVo() {
-    }
+    private Instant publishTime;
 
-    public AuthorBookVo(Long id, String name, String title, Long authorId, LocalDateTime publishTime) {
-        this.id = id;
-        this.name = name;
-        this.title = title;
-        this.authorId = authorId;
-        this.publishTime = publishTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public LocalDateTime getPublishTime() {
-        return publishTime;
-    }
-
-    public void setPublishTime(LocalDateTime publishTime) {
-        this.publishTime = publishTime;
-    }
+    private Author author;
 }

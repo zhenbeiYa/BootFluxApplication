@@ -10,6 +10,6 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface AuthRepository extends R2dbcRepository<Author, Long> {
 
-    @Query("select au.id,au.name,bk.author_id,bk.title,bk.publish_time from t_author au left join t_book bk on au.id=bk.author_id where title!=\"\" and au.id=?")
+    @Query("select au.name as name ,bk.* from t_author au left join t_book bk on au.id=bk.author_id where title!=\"\" and au.id=?")
     Flux<AuthorBookVo> findAuthBookById(Long id);
 }
