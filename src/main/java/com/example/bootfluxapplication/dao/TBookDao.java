@@ -3,7 +3,7 @@ package com.example.bootfluxapplication.dao;
 import com.example.bootfluxapplication.entity.TBook;
 import com.example.bootfluxapplication.repositories.BookAuthorRepository;
 import com.example.bootfluxapplication.repositories.BookRepository;
-import com.example.bootfluxapplication.vo.AuthorBookVo;
+import com.example.bootfluxapplication.vo.BookAuthorVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -27,7 +27,7 @@ public class TBookDao {
         return  bookRepository.findAll();
     }
 
-    public Flux<AuthorBookVo> findBooksAndAuthor(long parseLong) {
+    public Flux<BookAuthorVo> findBooksAndAuthor(long parseLong) {
         return  bookAuthorRepository.findBooksAndAuthor(parseLong);
     }
 }

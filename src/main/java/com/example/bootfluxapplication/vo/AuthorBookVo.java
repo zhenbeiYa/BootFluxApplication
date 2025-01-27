@@ -1,39 +1,31 @@
 package com.example.bootfluxapplication.vo;
 
-import com.example.bootfluxapplication.entity.Author;
+import com.example.bootfluxapplication.entity.TBook;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.List;
 
 /**
  * @author 23133
  * @version 1.0
- * @description: 作者书籍Vo
- * @date 2025/1/24 19:27
+ * @description: 作者图书 Vo
+ * @date 2025/1/26 9:49
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Table("t_book")
+@NoArgsConstructor
+@Table("t_author")
 public class AuthorBookVo implements Serializable {
-
-    //作者ID
     @Id
     private Long id;
-    //作者名称
     private String name;
-    //作者所作书籍名称
-    private String title;
-
-    private Long authorId;
-    //书籍发布时间
-
-    private Instant publishTime;
-
-    private Author author;
+    //非数据库字段，临时字段
+    @Transient
+    List<TBook> books;
 }

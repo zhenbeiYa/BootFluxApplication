@@ -3,6 +3,7 @@ package com.example.bootfluxapplication.contoller;
 import com.example.bootfluxapplication.entity.Author;
 import com.example.bootfluxapplication.service.AuthorService;
 import com.example.bootfluxapplication.vo.AuthorBookVo;
+import com.example.bootfluxapplication.vo.BookAuthorVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -25,7 +26,12 @@ public class AuthorController {
     }
 
     @PostMapping("/book")
-    public Flux<AuthorBookVo> findAuthBookById(@RequestParam("id")Integer id){
+    public Flux<BookAuthorVo> findAuthBookById(@RequestParam("id")Integer id){
         return  authorService.findAuthBookById(Long.parseLong(String.valueOf(id)));
+    }
+
+    @PostMapping("/books")
+    public Flux<AuthorBookVo> findAuthBooks(){
+        return  authorService.findAuthBooks();
     }
 }

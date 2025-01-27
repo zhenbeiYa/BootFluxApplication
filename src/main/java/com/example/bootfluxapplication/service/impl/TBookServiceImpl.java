@@ -3,7 +3,7 @@ package com.example.bootfluxapplication.service.impl;
 import com.example.bootfluxapplication.dao.TBookDao;
 import com.example.bootfluxapplication.entity.TBook;
 import com.example.bootfluxapplication.service.TBookService;
-import com.example.bootfluxapplication.vo.AuthorBookVo;
+import com.example.bootfluxapplication.vo.BookAuthorVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -27,7 +27,7 @@ public class TBookServiceImpl  implements TBookService {
     }
 
     @Override
-    public Flux<AuthorBookVo> findBooksAndAuthor(long parseLong) {
+    public Flux<BookAuthorVo> findBooksAndAuthor(long parseLong) {
         return tBookDao.findBooksAndAuthor(parseLong);
     }
 

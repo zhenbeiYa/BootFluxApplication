@@ -1,11 +1,11 @@
 package com.example.bootfluxapplication.service;
 
 import com.example.bootfluxapplication.entity.TBook;
-import com.example.bootfluxapplication.vo.AuthorBookVo;
+import com.example.bootfluxapplication.vo.BookAuthorVo;
 import reactor.core.publisher.Flux;
 
 public interface TBookService {
     Flux<TBook> list();
 
-    Flux<AuthorBookVo> findBooksAndAuthor(long parseLong);
+    Flux<BookAuthorVo> findBooksAndAuthor(long parseLong);
 }

@@ -1,13 +1,10 @@
 package com.example.bootfluxapplication.converter;
 
 import com.example.bootfluxapplication.entity.Author;
-import com.example.bootfluxapplication.entity.TBook;
-import com.example.bootfluxapplication.vo.AuthorBookVo;
+import com.example.bootfluxapplication.vo.BookAuthorVo;
 import io.r2dbc.spi.Row;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 
@@ -19,22 +16,22 @@ import java.time.Instant;
  * @date 2025/1/24 20:20
  */
 @ReadingConverter
-public class TBookConverter implements Converter<Row, AuthorBookVo> {
+public class TBookConverter implements Converter<Row, BookAuthorVo> {
 
     @Override
-    public AuthorBookVo convert(Row source) {
-        AuthorBookVo authorBookVo = new AuthorBookVo();
-        authorBookVo.setId(source.get("id", Long.class));
-        authorBookVo.setTitle(source.get("title", String.class));
-        authorBookVo.setPublishTime(source.get("publish_time", Instant.class));
+    public BookAuthorVo convert(Row source) {
+        BookAuthorVo bookAuthorVo = new BookAuthorVo();
+        bookAuthorVo.setId(source.get("id", Long.class));
+        bookAuthorVo.setTitle(source.get("title", String.class));
+        bookAuthorVo.setPublishTime(source.get("publish_time", Instant.class));
         Long authorId = source.get("author_id", Long.class);
-        authorBookVo.setAuthorId(authorId);
-        if (StringUtils.hasLength(source.get("name", String.class))) {
+        bookAuthorVo.setAuthorId(authorId);
+        if (source.getMetadata().contains("name")) {
             Author author = new Author();
             author.setId(authorId);
             author.setName(source.get("name", String.class));
-            authorBookVo.setAuthor(author);
+            bookAuthorVo.setAuthor(author);
         }
-        return authorBookVo;
+        return bookAuthorVo;
     }
 }
