@@ -81,6 +81,11 @@
             <version>3.0.4</version>
             <scope>test</scope>
         </dependency>
+<!--        引入SpringSecurity-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

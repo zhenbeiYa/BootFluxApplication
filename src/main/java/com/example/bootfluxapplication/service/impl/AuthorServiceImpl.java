@@ -49,7 +49,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Flux<AuthorBookVo> findAuthBooks() {
-        Flux.just(1).buffer();
         return databaseClient.sql("select ta.id as aid,ta.name,tb.* from t_author ta LEFT JOIN t_book tb on ta.id=tb.author_id ORDER BY author_id").fetch().all().bufferUntilChanged(stringObjectMap -> Long.parseLong(stringObjectMap.get("aid").toString())).map(list -> {
             AuthorBookVo authorBookVo = new AuthorBookVo();
             Map<String, Object> stringObjectMap = list.get(0);
