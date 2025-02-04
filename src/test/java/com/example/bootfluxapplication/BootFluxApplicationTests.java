@@ -10,6 +10,7 @@ import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.server.HttpServer;
 
@@ -64,5 +65,14 @@ class BootFluxApplicationTests {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Test
+    public void BCryptTest() {
+        String xisi123 = passwordEncoder.encode("xisi123");
+        System.out.println("xisi123 = " + xisi123);
     }
 }

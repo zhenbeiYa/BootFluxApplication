@@ -3,6 +3,7 @@ package com.example.bootfluxapplication.contoller;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeEditor;
 import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,16 +21,19 @@ import java.time.Duration;
 @RestController
 @RequestMapping("/rest")
 public class MyRestController {
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/hello")
     public Mono<String> hello() {
         return Mono.just("hello");
     }
 
+    @PreAuthorize("hasAuthority('view')")
     @GetMapping("/hello/{key}")
     public Mono<String> helloKey(@PathVariable("key") String Key) {
         return Mono.just("hello" + Key);
     }
 
+    @PreAuthorize("hasAuthority('download')")
     @GetMapping("/hello1")
     public Mono<String> helloKey2(@RequestParam(value = "key", required = false, defaultValue = "Key") String Key) {
         return Mono.just("hello" + Key);

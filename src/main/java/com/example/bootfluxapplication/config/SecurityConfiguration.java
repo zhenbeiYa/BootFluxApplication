@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -24,6 +25,8 @@ import java.util.Map;
  * @description: SpringSecurity 配置
  * @date 2025/1/29 10:34
  */
+//开启方法级的权限和角色认证
+@EnableReactiveMethodSecurity(useAuthorizationManager=true)
 @Configuration
 public class SecurityConfiguration {
     @Autowired
@@ -49,5 +52,4 @@ public class SecurityConfiguration {
         http.authenticationManager(new UserDetailsRepositoryReactiveAuthenticationManager(currUserDetailService));
         return http.build();
     }
-
 }
